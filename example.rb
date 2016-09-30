@@ -2,14 +2,20 @@
 require 'rubygems'
 require 'sinatra'
 
-
-
-
   configure do
     set :views, 'views'
   end
 
-  get '/pokemons/:name' do
-    @pokemon = params[:name]
-    erb :show_pokemon
+  get '/' do
+    erb :index
+  end
+
+  post '/capture' do
+    pokemon_name = params[:pokemon_name]
+    redirect("/pokemons/#{pokemon_name}")
+  end
+
+  get '/pokemons/:pokemon_name' do
+    @pokemon = params[:pokemon_name]
+    erb :show
   end
